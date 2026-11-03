@@ -722,6 +722,14 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
 .set-preview .pv-row span:last-child{text-align:right;font-weight:700}
 .bank-detail{display:none;background:var(--soft);border-radius:12px;padding:11px 13px;font-size:13px;line-height:1.6;color:var(--heading);margin-top:10px}
 .bank-detail.show{display:block}
+.bank-qr-preview{margin-top:14px;background:var(--soft);border-radius:14px;padding:14px;display:flex;gap:14px;align-items:flex-start}
+.bank-qr-preview[hidden]{display:none}
+.bank-qr-preview .bqp-img{width:150px;flex:none;background:#fff;border:1px solid var(--border);border-radius:10px;padding:6px}
+.bank-qr-preview .bqp-img img{width:100%;height:auto;display:block}
+.bank-qr-preview .bqp-info{font-size:13px;line-height:1.6;color:var(--heading);min-width:0}
+.bank-qr-preview .bqp-info b.bqp-title{display:block;font-size:14px;margin-bottom:4px}
+.bank-qr-preview .bqp-info p{margin:0 0 6px}
+@media(max-width:480px){.bank-qr-preview{flex-direction:column;align-items:center}.bank-qr-preview .bqp-info{text-align:center}}
 @media(max-width:480px){.set-card{padding:16px 13px}.admin-tab{padding:9px 14px;font-size:13.5px}}
 
 /* ===== Chữ LED chạy ngang — ô sửa + chip xem trước trong Cài đặt ===== */
@@ -1727,6 +1735,14 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
             <button class="btn btn-outline" type="button" id="clearBankBtn">Xóa Thông Tin Ngân Hàng</button>
           </div>
           <div class="admin-note">Sau khi lưu, phần thanh toán tự điền sẵn ngân hàng nhận tiền của shop vào mã QR SePay / VietQR và nội dung chuyển khoản của mỗi đơn. Áp dụng ngay trong lần xem này.</div>
+          <div class="bank-qr-preview" id="bankQrPreview" hidden>
+            <div class="bqp-img" id="bqpImg"></div>
+            <div class="bqp-info">
+              <b class="bqp-title">Xem trước mã QR thanh toán</b>
+              <p>Đây chỉ là <b>bản xem trước</b> để kiểm tra — số tiền mẫu <b>100.000đ</b> và nội dung mẫu <b id="bqpDes"></b>, <b>không phải đơn hàng thật</b>. Mã QR này tự sinh từ ngân hàng, số tài khoản, tên chủ tài khoản và tên shop chị vừa lưu. Khi khách đặt hàng thật, web tự tạo mã QR y hệt với đúng số tiền và mã thanh toán của từng đơn.</p>
+              <p id="bqpLine" style="margin:0"></p>
+            </div>
+          </div>
         </div>
 
         <div class="set-card">
@@ -3033,6 +3049,19 @@ function updateShopDisplay(){
     document.querySelectorAll('a[href*="tiktok.com"]').forEach(function(a){ a.setAttribute("href", url); });
   }
 }
+/* Xem trước mã QR ngay trong thẻ cài đặt ngân hàng: chỉ hiện khi admin đã lưu
+   đủ ngân hàng + số tài khoản, dùng số tiền mẫu 100.000đ và nội dung mẫu
+   (giữ quy tắc SEVQR của contentFor) — bản xem trước, không phải đơn thật. */
+function renderBankQrPreview(){
+  var box = document.getElementById("bankQrPreview");
+  if(!box) return;
+  if(!SHOP_BANK_ACCOUNT || !SHOP_BANK_NAME){ box.hidden = true; return; }
+  var des = contentFor(SHOP_BANK_NAME);
+  document.getElementById("bqpImg").innerHTML = '<img src="' + sepayQrUrl(SHOP_BANK_NAME, 100000, des) + '" alt="Xem trước mã QR VietQR — ' + SHOP_BANK_NAME + ', số tiền mẫu 100.000đ" />';
+  document.getElementById("bqpDes").textContent = des;
+  document.getElementById("bqpLine").innerHTML = "Ngân hàng <b>" + SHOP_BANK_NAME + "</b> • Số tài khoản <b>" + SHOP_BANK_ACCOUNT + "</b>" + (SHOP_BANK_HOLDER ? " • Chủ tài khoản <b>" + SHOP_BANK_HOLDER + "</b>" : "") + " • Tên shop trên mã QR: <b>" + (SHOP_SETTINGS.shopName || "ToleNhaCa") + "</b>";
+  box.hidden = false;
+}
 document.getElementById("saveSettingsBtn").addEventListener("click", function(){
   var bank = chosenShopBank || sBankInput.value.trim();
   var acc = document.getElementById("sAccount").value.trim();
@@ -3056,6 +3085,7 @@ document.getElementById("saveSettingsBtn").addEventListener("click", function(){
   updateShopDisplay();
   applyLiveDisplay();
   var ready = updateSettingsPreview();
+  renderBankQrPreview();
   if(ready){
     setStatus("ok", "<b>Đã lưu &amp; áp dụng.</b> Từ đơn tiếp theo, mã QR SePay / VietQR tự điền sẵn: ngân hàng <b>" + bank + "</b> • Số tài khoản <b>" + acc + "</b>" + (holder ? " • Chủ tài khoản <b>" + holder + "</b>" : "") + " • Nội dung mẫu <b>" + contentFor(bank) + "</b>. Khách quét là thông tin tự điền đúng số tiền đơn.");
     showToast("Đã lưu cài đặt — thanh toán sẽ tự điền ngân hàng " + bank);
@@ -3072,7 +3102,7 @@ document.getElementById("clearBankBtn").addEventListener("click", function(){
   document.getElementById("sContentRule").value = "";
   document.getElementById("sBankPicked").classList.remove("show");
   document.getElementById("sBankDetail").classList.remove("show");
-  renderBankTpls(); updateSettingsPreview();
+  renderBankTpls(); updateSettingsPreview(); renderBankQrPreview();
   setStatus("warn", "<b>Đã xóa thông tin ngân hàng.</b> Khi nào có số tài khoản thật, chị chọn lại mẫu ngân hàng ở mục 5, điền số tài khoản rồi bấm Lưu &amp; Áp Dụng Ngay.");
   showToast("Đã xóa thông tin ngân hàng trong cài đặt");
 });
@@ -3088,7 +3118,7 @@ function showAdminTab(which){
   document.getElementById("tabSettingsBtn").classList.toggle("active", isSet);
   if(isOrd){ renderOrders(); }
   if(isSet){
-    renderBankTpls(); updateSettingsPreview();
+    renderBankTpls(); updateSettingsPreview(); renderBankQrPreview();
     if(!SHOP_BANK_ACCOUNT){
       setStatus("warn", "<b>Chưa có số tài khoản thật — đang để trống đúng ý shop.</b> Chọn một mẫu ngân hàng ở mục 5 để tự điền tên ngân hàng và mẫu nội dung chuyển khoản; số tài khoản và tên chủ tài khoản điền sau ở mục 3, bấm Lưu là áp dụng ngay vào thanh toán.");
     }
@@ -3489,10 +3519,11 @@ document.getElementById("lockNowBtn").addEventListener("click", function(){ lock
 var lastOrder = null;
 var PAY_LABELS = { cod:"Thanh toán khi nhận hàng (COD)", bank:"Chuyển khoản ngân hàng — SePay (VietQR)", momo:"Ví MoMo" };
 var BANKS_VN = ["Vietcombank","VietinBank","BIDV","Agribank","Techcombank","MBBank (MB)","ACB","VPBank","Sacombank","TPBank","HDBank","VIB","SHB","MSB","OCB","Eximbank","SeABank","LPBank (LienVietPostBank)","ABBank","Bac A Bank","BaoViet Bank","Nam A Bank","Viet A Bank","Kienlongbank","Saigonbank","SCB","DongA Bank","PGBank","GPBank","NCB","PVcomBank","VietBank","BVBank (Bản Việt)","Co-opBank","VRB","Shinhan Bank Việt Nam","HSBC Việt Nam","Standard Chartered Việt Nam","UOB Việt Nam","CIMB Việt Nam","Public Bank Việt Nam","Hong Leong Bank Việt Nam","Woori Bank Việt Nam","Ngân hàng khác"];
-/* SePay VietQR (qr.sepay.vn): mã QR chứa ngân hàng + số tài khoản + số tiền +
-   nội dung chuyển khoản; khách quét bằng app ngân hàng thì thông tin tự điền.
-   Điền số tài khoản & tên chủ tài khoản của shop vào 2 biến dưới là mã QR thành
-   QR quét trả trực tiếp (link nhúng vietqr.app, template compact) — không cần đổi cấu trúc. */
+/* SePay VietQR: mã QR chứa ngân hàng + số tài khoản + số tiền + nội dung chuyển
+   khoản + tên chủ tài khoản + tên shop; khách quét bằng app ngân hàng thì thông
+   tin tự điền. 2 biến dưới luôn để trống mặc định — giá trị thật chỉ đến từ phần
+   admin lưu trong Cài Đặt Shop & Thanh Toán (xem saveSettingsBtn), không viết
+   cứng số tài khoản / tên chủ tài khoản nào trong code. */
 var SHOP_BANK_ACCOUNT = "";
 var SHOP_BANK_HOLDER = "";
 /* ----- Ô ngân hàng kiểu gõ chữ tự gợi ý & điền sẵn ----- */
@@ -3668,12 +3699,21 @@ function copyText(txt, msg){
     navigator.clipboard.writeText(txt).then(done, fallback);
   } else fallback();
 }
+/* Link ảnh QR theo đúng mẫu vietqr.app/img: mọi giá trị (số tài khoản, ngân hàng,
+   tên chủ tài khoản, tên shop) đều lấy từ Cài Đặt Shop & Thanh Toán admin đã lưu,
+   không viết cứng số tài khoản nào. showinfo=1 để hiện thông tin chuyển khoản
+   dưới mã QR cho khách dễ kiểm tra; không ép tải xuống, không ép hiện đầy đủ
+   số tài khoản nên bỏ qua download / fullacc. */
 function sepayQrUrl(bank, amount, des){
-  return "https://vietqr.app/img?acc=" + encodeURIComponent(SHOP_BANK_ACCOUNT) +
+  var url = "https://vietqr.app/img?acc=" + encodeURIComponent(SHOP_BANK_ACCOUNT) +
     "&bank=" + encodeURIComponent(SHOP_BANK_NAME || bank) +
     "&amount=" + encodeURIComponent(amount) +
     "&des=" + encodeURIComponent(des) +
     "&template=compact";
+  if(SHOP_BANK_HOLDER) url += "&holder=" + encodeURIComponent(SHOP_BANK_HOLDER);
+  if(SHOP_SETTINGS.shopName) url += "&store=" + encodeURIComponent(SHOP_SETTINGS.shopName);
+  url += "&showinfo=1";
+  return url;
 }
 function renderSepayQR(bank, amount, des){
   if(!SHOP_BANK_ACCOUNT) return false;

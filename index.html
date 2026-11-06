@@ -1050,6 +1050,40 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   footer.site .copyright
   {padding-right:122px}
 }
+/* ===== Mobile: chữ đều — cân dòng tiêu đề, tránh chữ mồ côi (≤480px) =====
+   Tiêu đề dùng text-wrap:balance để các dòng dài gần bằng nhau;
+   đoạn văn dùng text-wrap:pretty để dòng cuối không còn một chữ lẻ.
+   Chỉ thuần chữ — không đổi bố cục, màu sắc hay desktop. */
+@media(max-width:480px){
+  .hero h1,
+  .sec-head h2,
+  .live-band h2,
+  .contact-band h2,
+  .fabric h2,
+  .flash h2,
+  .why h3,
+  .faq-q,
+  .cat-card h3,
+  .pcard h3,
+  .card-colors,
+  .modal-info h3,
+  footer.site .copyright
+  {text-wrap:balance}
+  .hero p.lead,
+  .sec-head p,
+  .live-band p,
+  .fabric p,
+  .why p,
+  .tip p,
+  .rev p,
+  .faq-a,
+  .contact-band p,
+  .contact-addr,
+  footer.site p,
+  .cat-card p,
+  .pcard .card-vnames
+  {text-wrap:balance}
+}
 /* ===== Mobile hero — chốt đợt cuối (≤480px) =====
    Tiêu đề khóa đúng 2 dòng bằng 2 span block (không phụ thuộc bề rộng máy);
    nút hero gọn 46px, icon nhỏ lại để vừa 1 hàng ở 360px. Desktop không đổi. */

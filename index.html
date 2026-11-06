@@ -77,8 +77,8 @@ header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);ba
 .search:focus-within{border-color:var(--primary);background:#fff}
 .search input{flex:1;min-width:0;width:auto;border:none;background:transparent;padding:4px 0;font-family:inherit;font-size:13px;color:var(--heading);outline:none}
 .search .ic{width:15px;height:15px;color:var(--body);flex:none}
-.search-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--primary);color:#fff;border-radius:50%;padding:0;white-space:nowrap}
-.search-btn .ic{width:16px;height:16px;color:#fff}
+.search-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--primary);color:#fff;border-radius:50%;padding:0;white-space:nowrap}
+.search-btn .ic{width:15px;height:15px;color:#fff}
 .search-btn:hover{background:var(--primary-dark)}
 .search-btn:focus-visible{outline:2px solid var(--heading);outline-offset:2px}
 nav.main{display:none;gap:20px;font-size:14.5px;font-weight:600;color:var(--heading)}
@@ -3448,6 +3448,16 @@ document.getElementById("adminGateBtn").addEventListener("click", function(){ re
 document.addEventListener("keydown", function(e){
   if(e.ctrlKey && e.shiftKey && (e.key === "A" || e.key === "a")){ e.preventDefault(); requestAdmin("products"); }
 });
+/* Đường vào Quản Trị qua link có #admin ở cuối địa chỉ (ví dụ …/#admin):
+   mở đúng cổng mật khẩu như khi bấm dấu chấm, và nếu đã bật ghi nhớ đăng
+   nhập thì vào thẳng Quản Trị — dùng chung requestAdmin nên hành vi giống
+   hệt các lối vào trên. Các hash điều hướng khác (#san-pham, #faq, …)
+   không bị ảnh hưởng vì chỉ khớp đúng "#admin". */
+function openAdminFromHash(){
+  if(window.location.hash === "#admin"){ requestAdmin("products"); }
+}
+window.addEventListener("hashchange", openAdminFromHash);
+openAdminFromHash();
 document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
 syncStats(); renderAdminList();
 

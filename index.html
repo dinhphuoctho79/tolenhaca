@@ -71,12 +71,13 @@ header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);ba
 .logo-text{display:flex;flex-direction:column;line-height:1.18;white-space:nowrap}
 .logo-name{font-size:.95em;font-weight:800;color:var(--primary);letter-spacing:-.01em}
 .logo-owner{font-size:.52em;font-weight:600;color:var(--body);letter-spacing:.03em}
-.search{flex:1 1 100%;order:4;position:relative;display:flex;align-items:center;gap:8px;border:1.5px solid var(--border);background:var(--soft2);border-radius:999px;padding:4px 4px 4px 14px}
-@media(min-width:820px){.search{flex:1 1 auto;order:0;max-width:430px}}
+.search{flex:0 1 auto;order:4;width:min(68%,420px);margin:0 auto;position:relative;display:flex;align-items:center;gap:6px;border:1.5px solid var(--border);background:var(--soft2);border-radius:999px;padding:2px 2px 2px 11px}
+@media(min-width:820px){.search{flex:1 1 auto;order:0;width:auto;max-width:330px;margin:0}}
 .search:focus-within{border-color:var(--primary);background:#fff}
-.search input{flex:1;min-width:0;width:auto;border:none;background:transparent;padding:7px 0;font-family:inherit;font-size:14px;color:var(--heading);outline:none}
-.search .ic{width:18px;height:18px;color:var(--body);flex:none}
-.search-btn{flex:none;background:var(--primary);color:#fff;font-weight:700;font-size:14px;line-height:1.2;border-radius:999px;padding:9px 18px;white-space:nowrap}
+.search input{flex:1;min-width:0;width:auto;border:none;background:transparent;padding:4px 0;font-family:inherit;font-size:13px;color:var(--heading);outline:none}
+.search .ic{width:15px;height:15px;color:var(--body);flex:none}
+.search-btn{flex:none;display:inline-flex;align-items:center;gap:5px;background:var(--primary);color:#fff;font-weight:700;font-size:12.5px;line-height:1.2;border-radius:999px;padding:6px 13px;white-space:nowrap}
+.search-btn .ic{width:13px;height:13px;color:#fff}
 .search-btn:hover{background:var(--primary-dark)}
 .search-btn:focus-visible{outline:2px solid var(--heading);outline-offset:2px}
 nav.main{display:none;gap:20px;font-size:14.5px;font-weight:600;color:var(--heading)}
@@ -237,6 +238,8 @@ section.block{padding:38px 0}
 .add-btn button{width:100%;background:var(--soft);color:var(--primary);font-weight:700;font-size:14px;padding:11px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,color .2s}
 .add-btn button:hover{background:var(--primary);color:#fff}
 .add-btn .ic{width:17px;height:17px}
+.add-btn a.ask-price{width:100%;background:var(--zalo);color:#fff;font-weight:700;font-size:14px;padding:11px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:7px}
+.add-btn a.ask-price:hover{background:#0053cc}
 .empty-box{display:none;background:#fff;border:1.5px dashed var(--accent);border-radius:var(--radius);padding:28px 20px;text-align:center;margin-top:16px}
 .empty-box.show{display:block}
 .empty-box h3{font-size:17px;margin-bottom:6px}
@@ -404,15 +407,15 @@ footer.site a:hover{color:var(--primary)}
 .zalo-wrap.dismissed .zalo-bubble{display:flex}
 @media(prefers-reduced-motion:reduce){.zalo-wrap{animation:none;transition:none}.zalo-wrap.scroll-hidden{transition:none}}
 /* Floating Facebook + popup */
-.fb-wrap{position:fixed;left:16px;bottom:86px;z-index:70;opacity:1;visibility:visible;transition:opacity .3s ease,transform .3s ease,visibility 0s linear 0s;animation:fbIn .5s ease .2s backwards}
-@media(min-width:900px){.fb-wrap{bottom:22px}}
+.fb-wrap{position:fixed;right:16px;bottom:144px;z-index:70;opacity:1;visibility:visible;transition:opacity .3s ease,transform .3s ease,visibility 0s linear 0s;animation:fbIn .5s ease .2s backwards}
+@media(min-width:900px){.fb-wrap{bottom:80px}}
 @keyframes fbIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .fb-wrap.scroll-hidden{opacity:0;transform:translateY(18px);visibility:hidden;pointer-events:none;transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
 .fb-float{width:52px;height:52px;border-radius:50%;background:var(--fb);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(24,119,242,.38);padding:0}
 .fb-float:hover{background:#0f66d6}
 .fb-float:focus-visible{outline:2px solid var(--heading);outline-offset:3px}
 .fb-float svg{width:19px;height:30px;display:block}
-.fb-pop{position:absolute;left:0;bottom:calc(100% + 12px);width:264px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--soft);border-radius:16px;box-shadow:var(--shadow-lg);padding:16px;text-align:left;display:none}
+.fb-pop{position:absolute;right:0;bottom:calc(100% + 12px);width:264px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--soft);border-radius:16px;box-shadow:var(--shadow-lg);padding:16px;text-align:left;display:none}
 .fb-pop.open{display:block;animation:fbPopIn .25s ease}
 @keyframes fbPopIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .fb-pop-head{display:flex;align-items:flex-start;gap:10px}
@@ -594,6 +597,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .cart-foot .btn{font-size:14px;padding:13px 10px}
   .zalo-wrap{bottom:82px;right:12px}
   .zalo-float{padding:11px 15px 11px 12px;font-size:13.5px}
+  .fb-wrap{bottom:138px;right:12px}
   .bottom-bar button,.bottom-bar a{font-size:10.5px;padding:5px 1px}
   .bottom-bar .ic{width:20px;height:20px}
   footer.site{padding-top:30px}
@@ -1021,7 +1025,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
     <div class="search" role="search">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></span>
       <input id="searchInput" type="search" placeholder="Tìm đồ tole, pijama, tole dây…" aria-label="Tìm sản phẩm" />
-      <button class="search-btn" id="searchBtn" type="button">Tìm</button>
+      <button class="search-btn" id="searchBtn" type="button"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></span>Tìm</button>
     </div>
     <nav class="main" aria-label="Điều hướng chính">
       <a href="#top">Trang chủ</a>
@@ -1079,7 +1083,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         <h1>Mát Nhẹ Như Làn Gió, <em>Đẹp Dịu Dàng</em> Mỗi Ngày</h1>
         <p class="lead">Đồ tole mặc nhà cho phụ nữ Việt — vải tole 2 da loại 1 mềm mát, thấm hút mồ hôi, mặc nhà hay đi chợ đều xinh. Đủ kiểu: tay dài, tay ngắn, tay lỡ, đùi, pijama và tole dây.</p>
         <div class="cta-row">
-          <a class="btn btn-primary led-frame led-frame-pink" href="#san-pham">Mua Ngay</a>
+          <a class="btn btn-primary led-frame led-frame-pink" id="heroBuyBtn" href="#san-pham">Xem Sản Phẩm</a>
           <a class="btn btn-zalo led-frame led-frame-blue" href="https://zalo.me/0355330717" target="_blank" rel="noopener">
             <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg></span>
             Tư Vấn Qua Zalo
@@ -1189,7 +1193,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
       <div class="sec-head">
         <span class="kicker">Đồ tole mặc nhà</span>
         <h2 id="prodSectionTitle">Sản Phẩm Của Shop</h2>
-        <p>Bấm vào ảnh hoặc tên sản phẩm để xem nhanh, chọn size và màu trước khi thêm vào giỏ.</p>
+        <p>Bấm vào ảnh hoặc tên sản phẩm để xem nhanh, ngắm trước size và màu mình thích rồi nhắn Zalo cho shop để hỏi giá và đặt hàng nhé chị.</p>
       </div>
       <div class="chips" id="chips" role="group" aria-label="Lọc sản phẩm theo loại"></div>
       <div class="filter-note" id="filterNote">Tất cả sản phẩm của shop đều may từ <b>tole 2 da loại 1</b> — bấm từng loại ở trên để lọc theo kiểu dáng.</div>
@@ -1359,7 +1363,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         </div>
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">Thanh toán bằng cách nào?<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
-          <div class="faq-a">Shop nhận thanh toán khi nhận hàng (COD) hoặc chuyển khoản ngân hàng. Khi bấm Đặt Hàng ngay trên web, chị nhận được mã đơn hàng và mã thanh toán — chuyển khoản chỉ cần ghi đúng mã thanh toán đó, shop đối chiếu và xác nhận đơn rất nhanh. Cần tư vấn size trước thì nhắn Zalo 0355 330 717.</div>
+          <div class="faq-a">Shop nhận thanh toán khi nhận hàng (COD) hoặc chuyển khoản ngân hàng. Hiện đặt hàng trên web đang tạm dừng trong lúc shop cập nhật giá — chị nhắn Zalo 0355 330 717 cho shop để hỏi giá và đặt hàng nhé chị, shop tư vấn size luôn cho mình.</div>
         </div>
       </div>
     </div>
@@ -1515,7 +1519,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         <h3 id="qvName"></h3>
         <p class="qv-code" id="qvCode"></p>
         <div class="rate"><span class="ic star" style="width:15px;height:15px;color:var(--star)"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg></span><b id="qvRate"></b><span id="qvReviews"></span></div>
-        <div class="price-row"><span class="price" id="qvPrice"></span></div>
+        <div class="price-row" id="qvPriceRow"><span class="price" id="qvPrice"></span></div>
         <p class="desc" id="qvDesc"></p>
         <div class="opt-label">Chọn size</div>
         <div class="opt-row" id="qvSizes"></div>
@@ -1523,10 +1527,11 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         <div class="opt-label">Chọn màu / họa tiết</div>
         <div class="opt-row" id="qvColors"></div>
         <p class="qv-vname" id="qvColorName"></p>
-        <div class="modal-actions">
+        <div class="modal-actions" id="qvActions">
           <button class="btn btn-outline" id="qvAdd">Thêm Vào Giỏ</button>
           <button class="btn btn-primary" id="qvBuy">Mua Ngay</button>
         </div>
+        <a class="btn btn-zalo" id="qvAskPrice" href="https://zalo.me/0355330717" target="_blank" rel="noopener" style="width:100%;display:none">Hỏi Giá Qua Zalo</a>
         <a class="btn btn-zalo" href="https://zalo.me/0355330717" target="_blank" rel="noopener" style="width:100%;margin-top:10px;padding:11px 10px;font-size:14px">Hỏi Size Qua Zalo</a>
         <p style="font-size:12.5px;margin:12px 0 0">Chưa chắc size? Nhắn Zalo cân nặng + chiều cao, shop chọn giúp.</p>
       </div>
@@ -2055,6 +2060,18 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         </div>
 
         <div class="set-card">
+          <h3>15. Hiển thị giá &amp; nút mua</h3>
+          <p>Giá đang <b>ẨN</b> ngoài web cho đến khi chị nhập giá thật xong. Khi TẮT: thẻ sản phẩm và Xem nhanh không hiện giá nào, không có nút “Mua Ngay” / “Thêm Vào Giỏ”, giỏ hàng ẩn ở đầu trang và thanh dưới trên điện thoại, nút đầu trang đổi thành “Xem Sản Phẩm”, và mỗi sản phẩm có nút “Hỏi Giá Qua Zalo” để khách nhắn hỏi giá. <b>Bật khi đã nhập giá thật cho tất cả sản phẩm</b> — giá, nút mua và giỏ hàng sẽ hiện lại đúng như trước. Giá chị nhập trong form sản phẩm vẫn giữ nguyên, công tắc này chỉ chặn phần hiển thị ngoài web.</p>
+          <div class="form-grid">
+            <div class="field"><label for="sShowPrice">Hiển thị giá &amp; nút mua ngoài web</label><select id="sShowPrice"><option value="off" selected>Tắt — ẩn giá &amp; nút mua</option><option value="on">Bật — hiện giá &amp; nút mua</option></select></div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="button" id="savePriceBtn">Lưu Hiển Thị Giá</button>
+          </div>
+          <div class="admin-note">Áp dụng ngay ngoài web trong lần xem này, giống mọi cài đặt khác của web tĩnh.</div>
+        </div>
+
+        <div class="set-card">
           <h3>Xem trước — thanh toán sẽ tự điền như sau</h3>
           <p>Đây là thông tin khách thấy và quét khi đặt hàng, sau khi chị lưu cài đặt.</p>
           <div class="set-preview" id="settingsPreview"></div>
@@ -2471,6 +2488,29 @@ refreshReviewProductSelects();
 renderPublicReviews();
 renderReviewAdmin();
 
+/* ---------- Hiển thị giá & nút mua (Cài Đặt, mục 15) ----------
+   Mặc định TẮT: chủ shop ẩn giá cho đến khi nhập giá thật xong. Khi TẮT,
+   thẻ sản phẩm và Xem nhanh không hiện giá, không có nút “Mua Ngay” /
+   “Thêm Vào Giỏ”, giỏ hàng ẩn ở header và thanh dưới điện thoại, nút hero
+   thành “Xem Sản Phẩm”, thay bằng nút “Hỏi Giá Qua Zalo”. Khi BẬT, mọi thứ
+   trở lại như trước. Giá vẫn giữ nguyên trong dữ liệu sản phẩm và form
+   Quản Trị — công tắc này chỉ chặn phần hiển thị. */
+var SHOW_PRICE = false;
+function paintQvPriceVisibility(){
+  var pr = document.getElementById("qvPriceRow"); if(pr) pr.style.display = SHOW_PRICE ? "" : "none";
+  var act = document.getElementById("qvActions"); if(act) act.style.display = SHOW_PRICE ? "" : "none";
+  var ask = document.getElementById("qvAskPrice"); if(ask) ask.style.display = SHOW_PRICE ? "none" : "";
+}
+function applyPriceVisibility(){
+  var cb = document.getElementById("cartBtn"); if(cb) cb.style.display = SHOW_PRICE ? "" : "none";
+  var cm = document.getElementById("cartBtnMobile"); if(cm) cm.style.display = SHOW_PRICE ? "" : "none";
+  var bb = document.querySelector(".bottom-bar"); if(bb) bb.style.gridTemplateColumns = SHOW_PRICE ? "" : "repeat(4,1fr)";
+  var hero = document.getElementById("heroBuyBtn"); if(hero) hero.textContent = SHOW_PRICE ? "Mua Ngay" : "Xem Sản Phẩm";
+  renderProducts();
+  if(typeof currentFilter !== "undefined" && typeof setFilter === "function") setFilter(currentFilter);
+  paintQvPriceVisibility();
+}
+
 var wished = {};
 function renderProducts(){
   prodGrid.innerHTML = "";
@@ -2490,12 +2530,14 @@ function renderProducts(){
       (p.code ? '<span class="pcode">Mã: '+p.code+'</span>' : '') +
       rateHTML(p) +
       (sold>0 ? '<div class="sold-row"><span class="sold">Đã bán '+sold+'</span></div>' : '') +
-      '<div class="price-row"><span class="price">'+fmt(p.price)+'</span></div>' +
-      '<span class="ship-tag">Đơn từ ' + fmtK(SHIP_CFG.freeFrom) + ' miễn phí ship</span>' +
+      (SHOW_PRICE ? '<div class="price-row"><span class="price">'+fmt(p.price)+'</span></div>' +
+      '<span class="ship-tag">Đơn từ ' + fmtK(SHIP_CFG.freeFrom) + ' miễn phí ship</span>' : '') +
       '<div class="sizes">'+p.sizes.map(function(s){return "<span>"+s+"</span>";}).join("")+'</div>' +
       '<div class="card-colors" aria-label="Các màu và họa tiết của sản phẩm">'+pVariants(p).slice(0,5).map(function(v){return '<span class="cdot" style="background:'+v.hex+'" title="'+v.name+'"></span>';}).join("")+'<span>'+pVariants(p).length+' màu / họa tiết</span></div>' +
       '<div class="card-vnames" title="'+pVariants(p).map(function(v){return v.name;}).join(", ")+'">'+pVariants(p).map(function(v){return v.name;}).join(" • ")+'</div>' +
-      '<div class="add-btn"><button data-add="'+p.id+'"><span class="ic">'+bagSVG+'</span>Thêm Vào Giỏ</button></div></div>';
+      (SHOW_PRICE
+        ? '<div class="add-btn"><button data-add="'+p.id+'"><span class="ic">'+bagSVG+'</span>Thêm Vào Giỏ</button></div></div>'
+        : '<div class="add-btn"><a class="ask-price" href="https://zalo.me/0355330717" target="_blank" rel="noopener">Hỏi Giá Qua Zalo</a></div></div>');
     prodGrid.appendChild(card);
   });
   prodGrid.querySelectorAll("[data-heart]").forEach(function(btn){
@@ -2736,6 +2778,7 @@ function openQuick(id){
     'Màu / họa tiết: <b>' + pVariants(p).map(function(v){ return v.name; }).join(", ") + '</b>';
   paintQvRate(p);
   document.getElementById("qvPrice").textContent = fmt(p.price);
+  paintQvPriceVisibility();
   document.getElementById("qvDesc").textContent = p.desc;
   var sz = document.getElementById("qvSizes");
   sz.innerHTML = "";
@@ -2801,7 +2844,7 @@ var FAQ_ITEMS = [
   { q:"Đặt hàng rồi bao lâu nhận được?", a:"" },
   { q:"Có size lớn cho người 70 – 85kg không?", a:"Có. Shop có size đến XXL cho người khoảng 73 – 85kg, phom suông rộng rãi. Nếu phân vân giữa hai size, cứ nhắn cân nặng và chiều cao qua Zalo, shop chọn giúp size vừa nhất.", key:"bigsize" },
   { q:"Vải tole giặt có bị co rút hay phai màu không?", a:"Tole 2 da loại 1 của shop đã được xử lý trước khi may nên rất ít co rút và bền màu. Chị chỉ cần giặt nhẹ, lộn trái và phơi nơi thoáng mát là vải giữ phom đẹp lâu." },
-  { q:"Thanh toán bằng cách nào?", a:"Shop nhận thanh toán khi nhận hàng (COD) hoặc chuyển khoản ngân hàng. Khi bấm Đặt Hàng ngay trên web, chị nhận được mã đơn hàng và mã thanh toán — chuyển khoản chỉ cần ghi đúng mã thanh toán đó, shop đối chiếu và xác nhận đơn rất nhanh. Cần tư vấn size trước thì nhắn Zalo 0355 330 717." }
+  { q:"Thanh toán bằng cách nào?", a:"Shop nhận thanh toán khi nhận hàng (COD) hoặc chuyển khoản ngân hàng. Hiện đặt hàng trên web đang tạm dừng trong lúc shop cập nhật giá — chị nhắn Zalo 0355 330 717 cho shop để hỏi giá và đặt hàng nhé chị, shop tư vấn size luôn cho mình." }
 ];
 var FAQ_CHEV = '<span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>';
 function renderFaq(){
@@ -4735,6 +4778,15 @@ document.getElementById("saveComboBtn").addEventListener("click", function(){
   setStatus("ok", COMBO.on ? "<b>Combo đang HIỆN</b> ngoài web với thông tin chị vừa điền." : "<b>Combo đang ẨN</b> — ngoài web không hiện thẻ combo nào.");
   showToast(COMBO.on ? "Đã bật combo ngoài web" : "Combo đang ẩn ngoài web");
 });
+/* Lưu: Hiển thị giá & nút mua (mục 15) — mặc định TẮT cho đến khi có giá thật */
+document.getElementById("savePriceBtn").addEventListener("click", function(){
+  SHOW_PRICE = document.getElementById("sShowPrice").value === "on";
+  applyPriceVisibility();
+  setStatus("ok", SHOW_PRICE
+    ? "<b>Giá &amp; nút mua đang HIỆN</b> ngoài web — khách thấy giá, nút “Mua Ngay” / “Thêm Vào Giỏ” và giỏ hàng như trước."
+    : "<b>Giá &amp; nút mua đang ẨN</b> ngoài web — khách chỉ thấy nút “Hỏi Giá Qua Zalo” ở mỗi sản phẩm. Bật lại ở đây khi đã nhập giá thật cho tất cả sản phẩm.");
+  showToast(SHOW_PRICE ? "Đã bật hiển thị giá & nút mua" : "Đã ẩn giá & nút mua ngoài web");
+});
 /* Trình sửa FAQ */
 function addFaqEditRow(item){
   var rows = document.getElementById("faqEditRows");
@@ -4804,6 +4856,7 @@ renderTrustBadges();
 applyCombo();
 applyFlash();
 applyMomoVisibility();
+applyPriceVisibility();
 
 tick(); setInterval(tick, 1000);
 setFilter("all");

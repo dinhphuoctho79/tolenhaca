@@ -1235,7 +1235,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
       </div>
       <div class="rev-grid" id="revList"></div>
       <div class="rev-empty" id="revEmpty">
-        <h3>Bạn đã mua đồ nhà Cá chưa?</h3>
+        <h3>Chưa có đánh giá nào — bạn là người đầu tiên chia sẻ cảm nhận nhé</h3>
         <p>Chia sẻ cảm nhận của bạn nhé — hoặc hỏi shop tư vấn size, chất vải, mẫu nào hợp với bạn. Đánh giá của bạn sẽ hiện ở đây sau khi shop duyệt, để các bạn khác tham khảo nè.</p>
       </div>
       <form class="rev-form" id="reviewForm" novalidate>
@@ -1340,7 +1340,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
       <div class="sec-head">
         <span class="kicker">Theo dõi đơn hàng</span>
         <h2>Tra Cứu Đơn Hàng Bằng Mã Đơn</h2>
-        <p>Nhập mã đơn hàng chị nhận được khi đặt hàng (ví dụ TNC-261103-AB12) kèm số điện thoại đã dùng để đặt — shop hiện ngay trạng thái đơn của chị.</p>
+        <p>Nhập mã đơn hàng chị nhận được khi đặt hàng (mã có dạng TNC-261103-XXXX) kèm số điện thoại đã dùng để đặt — shop hiện ngay trạng thái đơn của chị.</p>
       </div>
       <div class="track-card">
         <form class="track-form" id="trackForm" novalidate>
@@ -3441,7 +3441,7 @@ function renderBankTpls(){
     return !q || vnFold(t.name + " " + t.short).indexOf(q) !== -1;
   });
   if(!list.length){
-    grid.innerHTML = '<p style="font-size:13.5px;margin:0">Không thấy mẫu ngân hàng này — chị gõ lại tên hoặc mã viết tắt (ví dụ: vcb, mb, tcb) nhé.</p>';
+    grid.innerHTML = '<p style="font-size:13.5px;margin:0">Không thấy mẫu ngân hàng này — chị gõ lại tên hoặc mã viết tắt như vcb, mb, tcb nhé.</p>';
     return;
   }
   grid.innerHTML = "";
@@ -4521,7 +4521,12 @@ function applyCombo(){
   if(!card) return;
   card.hidden = !COMBO.on;
   if(COMBO.on){
-    document.getElementById("comboTitle").textContent = (COMBO.title || "Combo Tiết Kiệm") + (COMBO.price ? " — " + COMBO.price : "");
+    var comboPriceTxt = "";
+    if(COMBO.price){
+      var comboPriceTrim = String(COMBO.price).trim();
+      comboPriceTxt = /^\d+$/.test(comboPriceTrim) ? fmt(parseInt(comboPriceTrim, 10)) : comboPriceTrim;
+    }
+    document.getElementById("comboTitle").textContent = (COMBO.title || "Combo Tiết Kiệm") + (comboPriceTxt ? " — " + comboPriceTxt : "");
     document.getElementById("comboDesc").textContent = COMBO.desc || "";
   }
 }

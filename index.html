@@ -525,25 +525,31 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .wrap{padding:0 14px}
   .announce{padding:11px 0}
   .led-edit-btn{font-size:11.5px;padding:7px 10px;right:8px}
-  .led{font-size:12px}
+  .led{font-size:11.5px}
   .led-dot{padding:0 9px}
   .head-in{gap:6px;height:60px}
   .logo{font-size:20px;gap:6px}
   .logo .dolphin{width:20px;height:20px}
   .icon-btn{width:38px;height:38px}
   section.block{padding:30px 0}
-  .hero{padding:20px 0 28px}
-  .hero h1{font-size:29px;line-height:1.22}
-  .hero p.lead{font-size:15.5px}
-  .cta-row .btn{flex:1 1 100%;padding:13px 16px}
+  .hero{padding:12px 0 18px}
+  .hero-grid{gap:14px}
+  .hero-photo .frame{aspect-ratio:4/3.2}
+  .hero h1{font-size:clamp(26px,7.2vw,34px);line-height:1.15;margin:10px 0}
+  .hero p.lead{font-size:15px;line-height:1.6;margin-bottom:16px}
+  .cta-row{gap:10px}
+  .cta-row .btn{flex:1 1 100%;min-height:50px;padding:12px 16px;font-size:16px}
+  .led-frame::before,.led-frame::after{display:none}
+  .led-frame-pink{box-shadow:0 3px 12px rgba(219,39,119,.20)}
+  .led-frame-blue{box-shadow:0 3px 12px rgba(0,104,255,.20)}
   .pill{font-size:11.5px;padding:6px 11px;line-height:1.4}
   .trust{gap:8px}
   .trust .t{padding:9px 8px}
   .trust b{font-size:13.5px;white-space:nowrap}
   .trust span{font-size:11px;line-height:1.35;display:block}
-  .float-tag{padding:8px 11px;max-width:78%}
-  .float-tag b{font-size:12.5px}
-  .float-tag span{font-size:11px;line-height:1.35;display:block}
+  .float-tag{padding:7px 10px;max-width:78%}
+  .float-tag b{font-size:12px}
+  .float-tag span{font-size:10.5px;line-height:1.35;display:block}
   .float-tag.top{left:10px;top:12px}
   .float-tag.bottom{right:10px;bottom:12px}
   .sec-head h2{font-size:24px;line-height:1.28}
@@ -562,12 +568,12 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .count{gap:5px}
   .fabric{padding:20px 16px}
   .fabric h2{font-size:21px}
-  .live-band{padding:22px 16px}
+  .live-band{padding:22px 16px;gap:18px}
   .live-band h2{font-size:22px;line-height:1.3}
   .live-cta{padding:16px}
   .live-cta .handle{font-size:19px;overflow-wrap:anywhere}
   .chips{gap:7px}
-  .chip{padding:8px 13px;font-size:12px}
+  .chip{padding:11px 14px;font-size:12.5px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
   .prod-grid{gap:10px}
   .pcard .info{padding:11px 11px 13px}
   .pcard .catline{font-size:10.5px}
@@ -577,9 +583,10 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .price-row{flex-direction:column;align-items:flex-start;gap:0;margin-top:6px}
   .price{font-size:17px}
   .old{font-size:12px}
-  .add-btn button{font-size:13px;padding:10px 6px;gap:5px;white-space:nowrap}
+  .add-btn button{font-size:13px;padding:10px 6px;gap:5px;white-space:nowrap;min-height:44px}
+  .add-btn a.ask-price{min-height:44px;padding:12px 8px}
   .add-btn .ic{width:16px;height:16px}
-  .quick{font-size:12px;padding:8px 4px;left:8px;right:8px;bottom:8px}
+  .quick{font-size:12px;padding:10px 6px;left:8px;right:8px;bottom:8px}
   .promo{min-height:210px}
   .promo .content{padding:18px;max-width:290px}
   .promo h3{font-size:19px}
@@ -588,26 +595,33 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .contact-btns .btn{flex:1 1 100%;padding:13px 14px}
   .contact-addr{justify-content:flex-start;text-align:left}
   .faq-q{padding:14px 15px;font-size:14.5px}
-  .faq-a{padding:0 15px 14px}
+  .faq-a{padding:0 15px 14px;line-height:1.6}
   .tip li{font-size:13.5px}
   .modal-actions .btn{font-size:13.5px;padding:12px 6px}
+  .modal-info .btn{min-height:44px}
   .modal-info{padding:18px 16px 20px}
   .modal-info h3{font-size:18px}
   .citem h4{font-size:13.5px;line-height:1.4}
   .cart-foot .btn{font-size:14px;padding:13px 10px}
   .zalo-wrap{bottom:82px;right:12px}
-  .zalo-float{padding:11px 15px 11px 12px;font-size:13.5px}
+  .zalo-float{padding:10px 13px 10px 11px;font-size:13px}
+  .zalo-float .ic{width:20px;height:20px}
   .fb-wrap{bottom:138px;right:12px}
+  .fb-float{width:44px;height:44px}
+  .fb-float svg{width:16px;height:25px}
   .bottom-bar button,.bottom-bar a{font-size:10.5px;padding:5px 1px}
   .bottom-bar .ic{width:20px;height:20px}
   footer.site{padding-top:30px}
+  footer.site li{padding:6px 0}
 }
 @media(max-width:360px){
-  .hero h1{font-size:27px}
+  .hero h1{font-size:26px}
   .trust b{font-size:12.5px}
+  .chip{padding:10px 12px;font-size:12px}
   .pcard h3{font-size:13.5px;min-height:37.8px}
   .rate{font-size:11px}
   .add-btn button{font-size:12.5px}
+  .add-btn a.ask-price{font-size:13px}
 }
 
 /* ===== Unified type & alignment system =====

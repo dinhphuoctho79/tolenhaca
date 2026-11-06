@@ -110,6 +110,7 @@ nav.main a:hover{color:var(--primary)}
 @media(min-width:768px){.hero h1{font-size:44px}}
 .hero h1 em{font-style:normal;color:var(--primary)}
 .hero p.lead{font-size:16.5px;max-width:34em;margin:0 0 20px}
+.lead-short{display:none}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:700;font-size:15px;padding:13px 24px;transition:background .2s,transform .2s;text-align:center}
 .btn-primary{background:var(--primary);color:#fff;box-shadow:var(--shadow)}
@@ -387,6 +388,8 @@ footer.site a:hover{color:var(--primary)}
 .pay-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .pay-tags span{font-size:12px;font-weight:700;background:var(--soft2);border:1px solid var(--border);color:var(--heading);padding:5px 11px;border-radius:8px}
 .copyright{border-top:1px solid var(--soft);margin-top:28px;padding-top:18px;font-size:13px;text-align:center}
+.copyright .credit-link{color:inherit;text-decoration:none}
+.copyright .credit-link:hover,.copyright .credit-link:focus{color:inherit;text-decoration:none}
 .admin-gate-dot{display:inline-block;margin-left:2px;padding:2px 5px;font-size:13px;line-height:1;color:inherit;opacity:.45;border-radius:6px}
 .admin-gate-dot:hover{opacity:.9}
 .admin-gate-dot:focus-visible{outline:2px solid var(--primary);outline-offset:2px;opacity:1}
@@ -523,7 +526,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
 .foot-contact li span:last-child{min-width:0}
 @media(max-width:480px){
   .wrap{padding:0 14px}
-  .announce{padding:11px 0}
+  .announce{padding:8px 0}
   .led-edit-btn{font-size:11.5px;padding:7px 10px;right:8px}
   .led{font-size:11.5px}
   .led-dot{padding:0 9px}
@@ -532,13 +535,17 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .logo .dolphin{width:20px;height:20px}
   .icon-btn{width:38px;height:38px}
   section.block{padding:30px 0}
-  .hero{padding:12px 0 18px}
-  .hero-grid{gap:14px}
-  .hero-photo .frame{aspect-ratio:4/3.2}
-  .hero h1{font-size:clamp(26px,7.2vw,34px);line-height:1.15;margin:10px 0}
-  .hero p.lead{font-size:15px;line-height:1.6;margin-bottom:16px}
-  .cta-row{gap:10px}
-  .cta-row .btn{flex:1 1 100%;min-height:50px;padding:12px 16px;font-size:16px}
+  .hero{padding:6px 0 6px}
+  .hero-grid{gap:10px}
+  .hero-photo .frame{aspect-ratio:4/1.5}
+  .hero-photo img{object-position:center 28%}
+  .hero h1{font-size:24px;line-height:1.15;margin:6px 0}
+  .hero p.lead{font-size:14px;line-height:1.55;margin-bottom:6px}
+  .hero p.lead .lead-full{display:none}
+  .hero p.lead .lead-short{display:inline}
+  .hero .pill{padding:5px 10px}
+  .cta-row{gap:10px;flex-wrap:nowrap}
+  .cta-row .btn{flex:1 1 0;min-height:48px;padding:11px 6px;font-size:14.5px;white-space:nowrap}
   .led-frame::before,.led-frame::after{display:none}
   .led-frame-pink{box-shadow:0 3px 12px rgba(219,39,119,.20)}
   .led-frame-blue{box-shadow:0 3px 12px rgba(0,104,255,.20)}
@@ -551,7 +558,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   .float-tag b{font-size:12px}
   .float-tag span{font-size:10.5px;line-height:1.35;display:block}
   .float-tag.top{left:10px;top:12px}
-  .float-tag.bottom{right:10px;bottom:12px}
+  .float-tag.bottom{left:10px;right:auto;bottom:12px}
   .sec-head h2{font-size:24px;line-height:1.28}
   .sec-head p{font-size:14.5px}
   .cat-grid{gap:10px}
@@ -615,7 +622,8 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
   footer.site li{padding:6px 0}
 }
 @media(max-width:360px){
-  .hero h1{font-size:26px}
+  .hero h1{font-size:23px}
+  .cta-row .btn{font-size:13.5px}
   .trust b{font-size:12.5px}
   .chip{padding:10px 12px;font-size:12px}
   .pcard h3{font-size:13.5px;min-height:37.8px}
@@ -1008,6 +1016,52 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
 .save-code-note{font-size:12.5px;line-height:1.55;margin:8px 0 0;color:var(--heading)}
 .save-code-note b{color:var(--primary-dark)}
 @media(max-width:480px){.track-card{padding:20px 16px}.tl-step{font-size:11px}.track-result{padding:14px}}
+
+/* ===== Mobile: chừa khoảng trống bên phải cho các đoạn chữ dài =====
+   Nút Chat Zalo nổi (rộng ~117px, cách mép phải 12px) và nút Facebook
+   luôn quét qua vùng phải màn hình khi khách cuộn. Các đoạn chữ chạy
+   hết chiều ngang (giới thiệu Live, trả lời FAQ, liên hệ, footer…)
+   được chừa 122px bên phải để đuôi dòng không bao giờ chui xuống
+   dưới nút nổi, ở mọi vị trí cuộn. Chỉ áp dụng ≤480px — desktop giữ nguyên. */
+@media(max-width:480px){
+  .sec-head p,
+  .live-band h2,
+  .live-band p,
+  .live-points,
+  .fabric p,
+  .fpoint p,
+  .why p,
+  .rev p,
+  .rev-empty p,
+  .rev-form>p,
+  .tip p,
+  .promo p,
+  .faq-a,
+  .contact-band p,
+  .flash p,
+  .filter-note,
+  .empty-box p,
+  .size-note,
+  .track-msg,
+  .save-code-note,
+  .tr-meta,
+  footer.site p,
+  footer.site .foot-contact li,
+  footer.site .copyright
+  {padding-right:122px}
+}
+/* ===== Mobile hero — chốt đợt cuối (≤480px) =====
+   Tiêu đề khóa đúng 2 dòng bằng 2 span block (không phụ thuộc bề rộng máy);
+   nút hero gọn 46px, icon nhỏ lại để vừa 1 hàng ở 360px. Desktop không đổi. */
+@media(max-width:480px){
+  .hero h1 .h1-line{display:block}
+  .cta-row .btn{min-height:46px;padding:9px 6px;font-size:14px}
+  .cta-row .btn .ic{width:20px;height:20px;flex:none}
+}
+@media(max-width:360px){
+  .cta-row .btn{font-size:13px;gap:6px}
+  .cta-row .btn .ic{width:18px;height:18px}
+}
 </style>
 </head>
 <body>
@@ -1094,8 +1148,8 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
     <div class="wrap hero-grid">
       <div>
         <span class="pill"><span class="dot"></span> Chất liệu chính: Tole 2 da loại 1</span>
-        <h1>Mát Nhẹ Như Làn Gió, <em>Đẹp Dịu Dàng</em> Mỗi Ngày</h1>
-        <p class="lead">Đồ tole mặc nhà cho phụ nữ Việt — vải tole 2 da loại 1 mềm mát, thấm hút mồ hôi, mặc nhà hay đi chợ đều xinh. Đủ kiểu: tay dài, tay ngắn, tay lỡ, đùi, pijama và tole dây.</p>
+        <h1><span class="h1-line">Mát Nhẹ Như Làn Gió,</span> <span class="h1-line"><em>Đẹp Dịu Dàng</em> Mỗi Ngày</span></h1>
+        <p class="lead"><span class="lead-full">Đồ tole mặc nhà cho phụ nữ Việt — vải tole 2 da loại 1 mềm mát, thấm hút mồ hôi. Đủ kiểu: tay dài, tay ngắn, tay lỡ, đùi, pijama và tole dây.</span><span class="lead-short">Đồ tole mặc nhà vải 2 da loại 1 — mềm mát, thấm hút, đủ kiểu dáng.</span></p>
         <div class="cta-row">
           <a class="btn btn-primary led-frame led-frame-pink" id="heroBuyBtn" href="#san-pham">Xem Sản Phẩm</a>
           <a class="btn btn-zalo led-frame led-frame-blue" href="https://zalo.me/0355330717" target="_blank" rel="noopener">
@@ -1122,7 +1176,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
       <div class="sec-head">
         <span class="kicker">Danh mục của shop</span>
         <h2>7 Loại Đồ Tole Tại ToleNhaCa</h2>
-        <p>Bấm vào từng loại để xem đúng sản phẩm của loại đó. Tất cả đều may từ <b style="color:var(--heading)">tole 2 da loại 1</b> — chất liệu chính của shop.</p>
+        <p id="catIntro">Bấm vào từng loại để xem đúng sản phẩm của loại đó. Tất cả đều may từ <b style="color:var(--heading)">tole 2 da loại 1</b> — chất liệu chính của shop.</p>
       </div>
       <div class="cat-grid" id="catGrid"></div>
     </div>
@@ -1463,7 +1517,7 @@ h1,h2,h3,h4,p,li,a,button{overflow-wrap:break-word}
         </ul>
       </div>
     </div>
-    <div class="copyright">© 2026 ToleNhaCa — Đồ tole mặc nhà mát nhẹ cho phụ nữ Việt.<button class="admin-gate-dot" id="adminGateBtn" type="button" aria-label="Khu vực dành cho chủ shop">•</button></div>
+    <div class="copyright"><a class="credit-link" href="https://zalo.me/0393990638" target="_blank" rel="noopener">Copyright 2026 © Dinh Công _Cần Thơ</a><button class="admin-gate-dot" id="adminGateBtn" type="button" aria-label="Khu vực dành cho chủ shop">•</button></div>
   </div>
 </footer>
 
